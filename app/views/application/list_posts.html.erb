@@ -1,0 +1,17 @@
+<html>
+<body>
+   <div class="posts">
+     <% posts.each do |post| %>
+        <div class="post">
+          <h2 class="title"><%= post['title'] %></h2>
+
+          <small class="meta">
+           <span class="author">by <%= post['author'] %>
+           <em class="created_at"><%= post['created_at'] %></em>
+          </small>
+        </div>
+        <hr />
+        <% end %>
+   </div>
+</body>
+</html>
