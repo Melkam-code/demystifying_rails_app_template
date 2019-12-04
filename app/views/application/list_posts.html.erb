@@ -3,7 +3,9 @@
    <div class="posts">
      <% posts.each do |post| %>
         <div class="post">
-          <h2 class="title"><%= post['title'] %></h2>
+          <h2 class="title">
+           <a href="/show_post/<%= post['id'] %>"><%= post['title'] %></a>
+          </h2>
 
           <small class="meta">
            <span class="author">by <%= post['author'] %>
