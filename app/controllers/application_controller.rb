@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
         render 'application/show_post', locals: { post: post }
     end
 
+    def new_post
+        render 'application/new_post'
+    end
+
     private
 
     def connection
