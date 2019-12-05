@@ -1,6 +1,7 @@
 <html>
 <body>
    <div class="posts">
+   <a href="/new_post">Create new post</a>
      <% posts.each do |post| %>
         <div class="post">
           <h2 class="title">
@@ -12,6 +13,8 @@
            <em class="created_at"><%= post['created_at'] %></em>
           </small>
         </div>
+        <br />
+        <a href="/edit_post/<%= post['id'] %>">Edit Post</a>
         <hr />
         <% end %>
    </div>
