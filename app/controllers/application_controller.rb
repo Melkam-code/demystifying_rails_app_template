@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
 
     def new_post
         render 'application/new_post'
+    end
+    
     def create_post
         insert_query = <<-SQL
           INSERT INTO posts (title, body, author, created_at)
@@ -50,6 +52,11 @@ class ApplicationController < ActionController::Base
         redirect_to '/list_posts'
     end
 
+    def delete_post
+        connection.execute("DELETE FROM posts WHERE posts.id = ?", params['id'])
+        redirect_to '/list_posts'
+    end
+
     private
 
     def connection
@@ -62,3 +69,4 @@ class ApplicationController < ActionController::Base
         connection.execute("SELECT * FROM posts WHERE posts.id = ? LIMIT 1", params['id']).first
     end
 end
+

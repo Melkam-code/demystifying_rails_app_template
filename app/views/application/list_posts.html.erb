@@ -15,6 +15,9 @@
         </div>
         <br />
         <a href="/edit_post/<%= post['id'] %>">Edit Post</a>
+        <form method="post" action="/delete_post/<%= post['id'] %>" style='display: inline'>
+            <input type="submit" value="Delete" />
+        </form>
         <hr />
         <% end %>
    </div>
