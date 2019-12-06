@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     end
 
     def show_post
-        post = find_post_by_id(params['id'])
+        post = Post.find(params['id'])
         render 'application/show_post', locals: { post: post }
     end
 
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     end
 
     def edit_post
-        post = find_post_by_id(params['id'])
+        post = Post.find(params['id'])
         render 'application/edit_post', locals: { post: post }
     end
 
@@ -56,10 +56,6 @@ class ApplicationController < ActionController::Base
         db_connection = SQLite3::Database.new 'db/development.sqlite3'
         db_connection.results_as_hash = true
         db_connection
-    end
-
-    def find_post_by_id(id)
-        connection.execute("SELECT * FROM posts WHERE posts.id = ? LIMIT 1", params['id']).first
     end
 end
 
