@@ -17,7 +17,13 @@ class Post
         id.nil?
     end
 
+    def valid?
+        title.present? && body.present? && author.present?
+    end
+
     def save
+        return false unless valid?
+        
         if new_record?
             insert
         else
