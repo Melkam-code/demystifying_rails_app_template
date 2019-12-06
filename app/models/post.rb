@@ -25,6 +25,13 @@ class Post
         end
     end
 
+    def self.all
+        post_hashes = connection.execute("SELECT * FROM posts")
+        post_hashes.map do |post_hash|
+            Post.new(post_hash)
+        end
+    end
+
     def insert
         insert_query = <<-SQL
           INSERT INTO posts (title, body, author, created_at)

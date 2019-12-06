@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     end
 
     def list_posts
-        posts = connection.execute("SELECT * FROM posts")
+        posts = Post.all
         render 'application/list_posts', locals: { posts: posts }
     end
 
