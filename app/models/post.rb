@@ -10,7 +10,7 @@ class Post
        @title = attributes['title']
        @body = attributes['body']
        @author = attributes['author']
-       @created_at = attributes['created_at']
+       @created_at ||= attributes['created_at']
     end
 
     def new_record?
@@ -50,6 +50,10 @@ class Post
           body,
           author,
           id
+    end
+
+    def destroy
+        connection.execute("DELETE FROM posts WHERE posts.id = ?", id)
     end
 
     def self.find(id)

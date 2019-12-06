@@ -35,12 +35,12 @@ class ApplicationController < ActionController::Base
         post = Post.find(params['id'])
         post.set_attributes('title' => params['title'], 'body' => params['body'], 'author' => params['author'])
         post.save
-        
         redirect_to '/list_posts'
     end
 
     def delete_post
-        connection.execute("DELETE FROM posts WHERE posts.id = ?", params['id'])
+        post = Post.find(params['id'])
+        post.destroy
         redirect_to '/list_posts'
     end
 
