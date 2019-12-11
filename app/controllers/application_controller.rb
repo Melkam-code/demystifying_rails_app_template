@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
         render 'application/hello_world', locals: { name: name }
     end
 
+    def create_comment
+          post = Post.find(params['post_id'])
+          post.create_comment('body' => params['body'], 'author' => params['author'])
+          redirect_to "/show_post/#{params['post_id']}"
+    end
+
     def list_posts
         posts = Post.all
         render 'application/list_posts', locals: { posts: posts }
@@ -11,8 +17,8 @@ class ApplicationController < ActionController::Base
 
     def show_post
         post = Post.find(params['id'])
-        comments = connection.execute('SELECT * FROM comments WHERE comments.post_id = ?', params['id'])
-        render 'application/show_post', locals: { post: post, comments: comments }
+        
+        render 'application/show_post', locals: { post: post }
     end
 
     def new_post
