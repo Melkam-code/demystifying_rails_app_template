@@ -10,6 +10,7 @@ Rails.application.routes.draw do
    get '/edit_post/:id' => 'application#edit_post'
    post '/update_post/:id' => 'application#update_post'
    post '/delete_post/:id' => 'application#delete_post'
+   post '/create_comment_for_post/:post_id' => 'application#create_comment'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
