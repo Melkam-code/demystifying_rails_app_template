@@ -31,21 +31,31 @@
     </p>
     <hr />
   <% end %>
+  
+  <!-- display errors -->
+  <div class="errors">
+    <% comment.errors.each do |attribute, error| %>
+      <p class="error" style="color: orange">
+        <%= attribute %>: <%= error %>
+      </p>
+    <% end%>
+  </div>
 
-  <!-- new comment form -->
-        <form method="post" action="/create_comment_for_post/<%= post.id %>">
+  <!-- populate comment <form> with values -->
+  <form method="post" action="/create_comment_for_post/<%= post.id %>">
 
-          <label for="body">Comment</label>
-          <textarea id="body" name="body"></textarea>
-          <br /> <br />
+    <label for="body">Comment</label>
+    <textarea id="body" name="body"><%= comment.body %></textarea>
+    <br /> <br />
 
-          <label for="author">Name</label>
-          <input id="author" name="author" type="text" />
-          <br /> <br />
+    <label for="author">Name</label>
+    <input id="author" name="author" type="text" value="<%= comment.author %>"/>
+    <br /> <br />
 
-          <input type="submit" value="Add Comment" />
-        </form>
-        <hr />
+    <input type="submit" value="Add Comment" />
+
+  </form>
+  <hr />
   </div>
   </div>
 
