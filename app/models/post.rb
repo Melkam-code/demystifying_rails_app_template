@@ -41,6 +41,10 @@ class Post
         comment.save
     end
 
+    def delete_comment(comment_id)
+        Comment.find(comment_id).destroy
+    end
+
     def save
         return false unless valid?
 
