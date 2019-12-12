@@ -1,4 +1,4 @@
-class Post
+class Post < BaseModel
     attr_reader :id, :title, :body, :author, :created_at, :errors
 
     def initialize(attributes={})
@@ -12,10 +12,6 @@ class Post
        @body = attributes['body']
        @author = attributes['author']
        @created_at ||= attributes['created_at']
-    end
-
-    def new_record?
-        id.nil?
     end
 
     def valid?
@@ -43,16 +39,6 @@ class Post
 
     def delete_comment(comment_id)
         Comment.find(comment_id).destroy
-    end
-
-    def save
-        return false unless valid?
-
-        if new_record?
-            insert
-        else
-            update
-        end
     end
 
     def self.all
@@ -98,13 +84,4 @@ class Post
         Post.new(post_hash)
     end
 
-    def self.connection
-        db_connection = SQLite3::Database.new 'db/development.sqlite3'
-        db_connection.results_as_hash = true
-        db_connection
-    end
-
-    def connection
-        self.class.connection
-    end
 end
