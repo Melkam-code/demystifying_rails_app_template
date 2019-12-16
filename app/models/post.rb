@@ -75,13 +75,4 @@ class Post < BaseModel
           id
     end
 
-    def destroy
-        connection.execute("DELETE FROM posts WHERE posts.id = ?", id)
-    end
-
-    def self.find(id)
-        post_hash = connection.execute("SELECT * FROM posts WHERE posts.id = ? LIMIT 1", id).first
-        Post.new(post_hash)
-    end
-
 end
