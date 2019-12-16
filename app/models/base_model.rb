@@ -4,7 +4,7 @@ class BaseModel
     def self.table_name
         to_s.pluralize.downcase
     end
-    
+  
       def self.all
         # use it in our SQL
         record_hashes = connection.execute("SELECT * FROM #{table_name}")
@@ -25,6 +25,17 @@ class BaseModel
         update
       end
       true
+    end
+
+    def destroy
+      query_string = "DELETE FROM #{self.class.table_name} WHERE #{self.class.table_name}.id = ?"
+      connection.execute query_string, id
+    end
+
+    def self.find(id)
+      query_string = "SELECT * FROM #{table_name} WHERE #{table_name}.id = ? LIMIT 1"
+      record_hash = connection.execute(query_string, id).first
+      new(record_hash)
     end
   
     def self.connection
